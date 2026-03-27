@@ -61,7 +61,7 @@ const flushQueue = async () => {
 
     for (let i = 0; i < qdt; i++) {
       const r = batch[i];
-      values.push(`($${paramIndex++}, $${paramIndex++})`);
+      values.push(`(${paramIndex++}, ${paramIndex++})`);
       params.push(r.evento_id, r.usuario_id);
     }
 
@@ -79,6 +79,7 @@ const flushQueue = async () => {
     } catch (err) {
       await client.query("ROLLBACK");
       process.stderr.write(`Erro no batch db: ${err}\n`);
+      filaReservas.unshift(...batch);
     } finally {
       client.release();
     }
