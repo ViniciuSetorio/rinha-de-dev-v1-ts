@@ -61,7 +61,7 @@ const flushQueue = async () => {
 
     for (let i = 0; i < qdt; i++) {
       const r = batch[i];
-      values.push(`(${paramIndex++}, ${paramIndex++})`);
+      values.push(`($${paramIndex++}, $${paramIndex++})`);
       params.push(r.evento_id, r.usuario_id);
     }
 
